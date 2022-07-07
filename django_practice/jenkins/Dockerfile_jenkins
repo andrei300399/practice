@@ -6,3 +6,4 @@ RUN apk add --update\
    python3-dev \
    build-base \
    py3-pip
+USER jenkins

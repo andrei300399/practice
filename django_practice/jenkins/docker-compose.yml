@@ -1,5 +1,10 @@
 version: '2'
 services:
+ postgres:
+   image: "postgres:9.6-alpine"
+   environment:
+     POSTGRES_PASSWORD: admin
+     POSTGRES_USER: admin
  jenkins:
    build:
      context: .
@@ -7,3 +12,5 @@ services:
    ports:
      - "9090:8080"
      - "50000:50000"
+   depends_on:
+     - postgres
