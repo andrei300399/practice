@@ -1,5 +1,8 @@
+import datetime
+
 from django.test import TestCase
-from models import Post
+from practice.models import Post
+from django.urls import reverse
 
 class PostTestCase(TestCase):
 
@@ -8,16 +11,20 @@ class PostTestCase(TestCase):
         self.assertEqual(1, 1)
 
     def test_creation_post(self):
-        post1 = Post.objects.create_user(
+        post1 = Post.objects.create(
             title='username1',
             text='email1@email.ru',
             author='password',
+            pub_date=datetime.datetime.now(),
+            count_likes=5
         )
 
-        post2 = Post.objects.create_user(
+        post2 = Post.objects.create(
             title='username2',
             text='email1@email.ru222',
             author='password22',
+            pub_date=datetime.datetime.now(),
+            count_likes=5
         )
 
         self.assertEqual(2, Post.objects.count())
@@ -25,5 +32,6 @@ class PostTestCase(TestCase):
         self.assertEqual(get_post2.title, post2.title)
 
     def test_view_post(self):
-        response = self.client.get('127.0.0.1:8000')
+        url = reverse("practice:index")
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
