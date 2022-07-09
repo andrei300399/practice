@@ -1,6 +1,8 @@
 from django.db import models
 
-# Create your models here.
-class Riddle(models.Model):
-    riddle_text = models.CharField(max_length=255)
-    pub_date = models.DateTimeField('date published')
+class Post(models.Model):
+    title = models.CharField('Заголовок', max_length=100)
+    text = models.TextField('Текст поста')
+    author = models.CharField('Автор', max_length=100)
+    pub_date = models.DateTimeField('Дата публикации')
+    count_likes = models.IntegerField('Количество лайков')
