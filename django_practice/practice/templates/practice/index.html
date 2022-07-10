@@ -2,13 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Блог</title>
 </head>
 <body>
+<h2>Список постов</h2>
 {%block content%}
 {% for i in post_list%}
-    <p>{{i.title}}</p>
+    <p>Заголовок: {{i.title}} </p>
+<p>Автор:{{i.author}}</p>
+<p>Дата публикации:{{i.pub_date}}</p>
+    <p>Текст:<br>{{i.text}}</p>
+    <p>Количество лайков:{{i.count_likes}}</p>
+<p><a href="{% url 'practice:delete_post' i.id %}">Удалить пост</a></p>
+    <hr>
 {%endfor%}
+    <hr>
+<h2>Добавление поста</h2>
+<form action="{% url 'practice:add_post' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button
+                    type="submit">Добавить пост
+            </button>
+        </form>
 {%endblock%}
+
 </body>
 </html>
