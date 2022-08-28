@@ -82,7 +82,7 @@ class PostTestCase(TestCase):
         self.assertNotIn(post_delete, get_post2)
 
     def test_add_and_delete_post_ui(self):
-        selenium = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        selenium = webdriver.Chrome(executable_path=ChromeDriverManager(path='./').install())
         selenium.get('http://127.0.0.1:8000/')
         input_title = selenium.find_element('id','id_add_title')
         input_text = selenium.find_element('id','id_add_text')
