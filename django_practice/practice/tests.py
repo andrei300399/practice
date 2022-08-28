@@ -2,7 +2,12 @@ import datetime
 
 from django.test import TestCase
 from practice.models import Post
+from selenium.webdriver.common.by import By
 from django.urls import reverse
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class PostTestCase(TestCase):
@@ -75,5 +80,35 @@ class PostTestCase(TestCase):
 
         get_post2 = Post.objects.all()
         self.assertNotIn(post_delete, get_post2)
+
+    def test_add_and_delete_post_ui(self):
+        selenium = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        selenium.get('http://127.0.0.1:8000/')
+        input_title = selenium.find_element('id','id_add_title')
+        input_text = selenium.find_element('id','id_add_text')
+        input_author = selenium.find_element('id','id_add_author')
+        input_count_likes = selenium.find_element('id','id_add_count_likes')
+
+        submit = selenium.find_element(By.CSS_SELECTOR,'button[type=submit]')
+
+        input_title.send_keys('Title ui selenium')
+        input_text.send_keys('Text ui selenium')
+        input_author.send_keys('Author ui selenium')
+        input_count_likes.send_keys('98')
+
+        submit.send_keys(Keys.RETURN)
+
+        assert 'Title ui selenium' in selenium.page_source
+        assert 'Text ui selenium' in selenium.page_source
+        assert 'Author ui selenium' in selenium.page_source
+        assert '98' in selenium.page_source
+
+        delete_button = selenium.find_element(By.XPATH, '//p[contains(text(),"Author ui selenium")]/..//a')
+        delete_button.send_keys(Keys.RETURN)
+
+        assert 'Title ui selenium' not in selenium.page_source
+        assert 'Text ui selenium' not in selenium.page_source
+        assert 'Author ui selenium' not in selenium.page_source
+        assert '98' not in selenium.page_source
 
 

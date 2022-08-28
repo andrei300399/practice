@@ -8,12 +8,14 @@
 <h2>Список постов</h2>
 {%block content%}
 {% for i in post_list%}
+<div>
     <p>Заголовок: {{i.title}} </p>
 <p>Автор:{{i.author}}</p>
 <p>Дата публикации:{{i.pub_date}}</p>
     <p>Текст:<br>{{i.text}}</p>
     <p>Количество лайков:{{i.count_likes}}</p>
 <p><a href="{% url 'practice:delete_post' i.id %}">Удалить пост</a></p>
+    </div>
     <hr>
 {%endfor%}
     <hr>
