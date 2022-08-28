@@ -8,6 +8,10 @@ from django.urls import reverse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+
+
 
 
 class PostTestCase(TestCase):
@@ -82,7 +86,10 @@ class PostTestCase(TestCase):
         self.assertNotIn(post_delete, get_post2)
 
     def test_add_and_delete_post_ui(self):
-        selenium = webdriver.Chrome(executable_path=ChromeDriverManager(path='./').install())
+        options = Options()
+        options.headless = True
+
+        selenium = webdriver.Chrome(executable_path=ChromeDriverManager(path='./').install(),  options=options)
         selenium.get('http://127.0.0.1:8000/')
         input_title = selenium.find_element('id','id_add_title')
         input_text = selenium.find_element('id','id_add_text')
