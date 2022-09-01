@@ -89,7 +89,7 @@ class PostTestCase(TestCase):
         options = Options()
         options.headless = True
 
-        selenium = webdriver.Chrome(executable_path=ChromeDriverManager(path='./').install(),  options=options)
+        selenium = webdriver.Chrome(options=options)
         selenium.get('http://127.0.0.1:8000/')
         input_title = selenium.find_element('id','id_add_title')
         input_text = selenium.find_element('id','id_add_text')
