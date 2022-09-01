@@ -123,6 +123,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+INSTALLED_APPS += ('django_jenkins',)
+JENKINS_TASKS = ('django_jenkins.tasks.run_pylint',
+                 'django_jenkins.tasks.run_pep8',
+                 'django_jenkins.tasks.run_pyflakes',
+                 'django_jenkins.tasks.with_coverage',
+                 'django_jenkins.tasks.django_tests',)
+
 from .local_settings import *
 SELENIUM_DISPLAY = ':99'
 JENKINS_TEST_RUNNER = 'django_practice.test_runner.ProjectRunner'
