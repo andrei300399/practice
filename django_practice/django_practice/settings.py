@@ -124,3 +124,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 from .local_settings import *
+SELENIUM_DISPLAY = ':99'
+JENKINS_TEST_RUNNER = 'django_practice.test_runner.ProjectRunner'
