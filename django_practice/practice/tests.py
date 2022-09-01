@@ -93,7 +93,7 @@ class PostTestCase(TestCase):
         chromeOptions.add_argument("--no-sandbox")
         chromeOptions.add_argument("--disable-setuid-sandbox")
 
-        chromeOptions.add_argument("--remote-debugging-port=9222")  # this
+        chromeOptions.add_argument("--remote-debugging-port=8000")  # this
 
         chromeOptions.add_argument("--disable-dev-shm-using")
         chromeOptions.add_argument("--disable-extensions")
@@ -103,7 +103,7 @@ class PostTestCase(TestCase):
         chromeOptions.add_argument(r"user-data-dir=.\cookies\\test")
 
         selenium = webdriver.Chrome(options=chromeOptions)
-        selenium.get('http://127.0.0.1:8000/')
+        selenium.get('http://127.0.0.1/')
         input_title = selenium.find_element('id','id_add_title')
         input_text = selenium.find_element('id','id_add_text')
         input_author = selenium.find_element('id','id_add_author')
