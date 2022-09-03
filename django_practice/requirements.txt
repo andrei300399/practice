@@ -1,5 +1,4 @@
 Django==3.2.14
-selenium==4.4.3
-webdriver-manager==3.8.3
+
 
 
