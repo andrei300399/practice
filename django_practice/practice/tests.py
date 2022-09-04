@@ -1,10 +1,7 @@
 import datetime
-
 from django.test import TestCase
 from practice.models import Post
 from django.urls import reverse
-
-from djangomockingbird.make_mocks import make_mocks
 from unittest.mock import patch
 from .factory import PostFactory
 import allure
