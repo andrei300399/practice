@@ -40,12 +40,12 @@ class PostTestCase(TestCase):
     def test_view_get_posts(self):
         with allure.step("Создание 10 постов"):
             posts = PostFactory.create_batch(10)
-            with allure.step("Открыть главную страницу ср всеми постами"):
+        with allure.step("Открыть главную страницу со всеми постами"):
                 with patch.object(Post.objects, 'values', return_value=posts):
                     url = reverse("practice:index")
                     response = self.client.get(url)
                     self.assertEqual(response.status_code, 200)
-                    with allure.step("Проверка созданных постов"):
+        with allure.step("Проверка созданных постов"):
                         for post in posts:
                             self.assertIn(post.title, str(response.content))
                             self.assertIn(post.text, str(response.content))
@@ -64,7 +64,7 @@ class PostTestCase(TestCase):
             with patch.object(Post.objects, 'create', return_value=post):
                 response_create = self.client.post(reverse("practice:add_post"), data_mock)
                 self.assertEqual(response_create.status_code, 302)
-                with allure.step("Проверка, что созданный пост отображается на странице"):
+        with allure.step("Проверка, что созданный пост отображается на странице"):
                     with patch.object(Post.objects, 'values', return_value=[post]):
                         url = reverse("practice:index")
                         response = self.client.get(url)
