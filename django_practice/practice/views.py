@@ -6,8 +6,9 @@ from .forms import AddPostForm
 from django.urls import reverse
 
 
+
 def index(request):
-    post_list = Post.objects.order_by('title')
+    post_list = Post.objects.values()
     post_form = AddPostForm()
     return render(request, "practice/index.html", {'post_list': post_list, "form": post_form})
 
